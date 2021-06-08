@@ -1,0 +1,17 @@
+<div class="container px-4">
+    <div class="media">
+        <% @tweets.reverse.each do |tweet| %>
+            <img src="<%= tweet.user.profile_picture %>" class="mr-3" alt="Image profile"  width="64" height="86">
+
+            <div class="media-body">
+                <h5 class="mt-0"><%= tweet.user.name %></h5>
+                <p><%= tweet.content %></p>
+                <i class="far fa-heart"></i>
+                <i class="fas fa-retweet"></i>
+            </div>
+            <br>
+            
+        <% end %>
+        
+    </div>
+</div> 
