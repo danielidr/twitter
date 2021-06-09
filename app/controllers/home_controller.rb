@@ -1,5 +1,8 @@
 class HomeController < ApplicationController
+
   def index
-    @tweets = Tweet.all
+    @tweet = Tweet.new
+    @tweets = Tweet.all.order(created_at: :DESC).page(params[:page])
   end
+  
 end

@@ -1,6 +1,9 @@
+<% if current_user %>
+    <%= render 'tweets/form', tweet: @tweet %>
+<% end %>
 
 <div class="container row">
-    <% @tweets.reverse.each do |tweet| %>
+    <% @tweets.each do |tweet| %>
         <div class="col-12 my-4 media">
             <img src="<%= tweet.user.profile_picture %>" class="mr-3" alt="Image profile"  width="64" height="86">
             <div class="media-body">
@@ -9,7 +12,7 @@
                 <%if tweet.like_count > 0 %>
                     <%= tweet.like_count %>
                 <% end %>
-                <i class="far fa-heart"></i>
+                <i><%= link_to '' , root_path, class: "far fa-heart" %></i>
                 <%if not tweet.is_rt %>
                     <% rt_count = tweet.retweet_count(tweet.id) %>
                     <%if rt_count > 0 %>
@@ -22,4 +25,8 @@
     <% end %>
 </div>
 
-
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+    <%= link_to_next_page @tweets, 'Mostrar más tweets' %>
+    </div>
+</div>
