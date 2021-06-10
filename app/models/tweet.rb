@@ -11,5 +11,10 @@ class Tweet < ApplicationRecord
     retweets = Tweet.where(origin_id: id)
     retweets.count
   end
+
+  def user_like?(id)
+    users_like = likes.pluck(:user_id)
+    users_like.include? id
+  end
   
 end

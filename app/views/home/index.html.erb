@@ -7,12 +7,20 @@
         <div class="col-12 my-4 media">
             <img src="<%= tweet.user.profile_picture %>" class="mr-3" alt="Image profile"  width="64" height="86">
             <div class="media-body">
+
                 <h5 class="mt-0"><%= tweet.user.name %></h5>
                 <p><%= tweet.content %></p>
+
                 <%if tweet.like_count > 0 %>
                     <%= tweet.like_count %>
                 <% end %>
-                <i><%= link_to '' , root_path, class: "far fa-heart" %></i>
+
+                <%if tweet.user_like?(tweet.user_id) %>
+                    <i class="fas fa-heart"></i>
+                <% else %>
+                    <i><%= link_to '' , likes_path(like: {tweet_id: tweet.id}, remote: true), method: :post, class: "far fa-heart" %></i>
+                <% end %>
+                
                 <%if not tweet.is_rt %>
                     <% rt_count = tweet.retweet_count(tweet.id) %>
                     <%if rt_count > 0 %>
