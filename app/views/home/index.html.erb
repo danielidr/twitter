@@ -14,20 +14,22 @@
                 <%if tweet.like_count > 0 %>
                     <%= tweet.like_count %>
                 <% end %>
-
-                <%if tweet.user_like?(tweet.user_id) %>
-                    <i class="fas fa-heart"></i>
+                <%if current_user %>
+                    <%if tweet.user_like?(current_user.id) %>
+                        <i><%= link_to '' , like_path({id: tweet.id_like(current_user)}), method: :delete, class: "fas fa-heart" %></i>
+                    <% else %>
+                        <i><%= link_to '' , likes_path(like: {tweet_id: tweet.id}, remote: true), method: :post, class: "far fa-heart" %></i>
+                    <% end %>
                 <% else %>
-                    <i><%= link_to '' , likes_path(like: {tweet_id: tweet.id}, remote: true), method: :post, class: "far fa-heart" %></i>
-                <% end %>
-                
+                    <i class= "far fa-heart"></i>
+                <%end%>
                 <%if not tweet.is_rt %>
                     <% rt_count = tweet.retweet_count(tweet.id) %>
                     <%if rt_count > 0 %>
                         <%= rt_count %>
                     <% end %>
                 <% end %>
-                <i class="fas fa-retweet"></i>
+                <i><%= link_to '' , tweets_path(rt: {origin_id: tweet.user_id, is_rt: true, content: tweet.content }, remote: true), method: :post, class: "fas fa-retweet" %><i>
             </div>
         </div>
     <% end %>
