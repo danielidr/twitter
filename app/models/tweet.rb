@@ -39,4 +39,20 @@ class Tweet < ApplicationRecord
     u_origin = User.find_by(id: id_u_origin)
     u_origin.profile_picture
   end
+
+  def time_tweet(date)
+    date_stg = date.in_time_zone("Santiago")
+    dif_time = Time.now - date_stg
+
+    time_min = (dif_time/60).round
+
+    if time_min <= 60
+      time_t = "#{time_min} min"
+    else
+      time_hours = time_min/60
+      time_t = "#{time_hours} h"
+    end
+    time_t 
+  end
+    
 end

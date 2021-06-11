@@ -47,6 +47,10 @@
                 <% else %>
                     <i class= "fas fa-retweet"></i>
                 <% end %>
+
+                <!-- Vista para fecha-->
+                <br>
+                <%= link_to "Hace #{tweet.time_tweet(tweet.created_at)}", tweet_path(tweet) %>
             </div>
         </div>
     <% end %>
