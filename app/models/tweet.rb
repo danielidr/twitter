@@ -26,5 +26,17 @@ class Tweet < ApplicationRecord
     end
   end
   
+  def name_tw_origin(o_id)
+    tw_origin = Tweet.find_by(id: o_id)
+    id_u_origin = tw_origin.user_id
+    u_origin = User.find_by(id: id_u_origin)
+    u_origin.name
+  end
   
+  def pic_tw_origin(o_id)
+    tw_origin = Tweet.find_by(id: o_id)
+    id_u_origin = tw_origin.user_id
+    u_origin = User.find_by(id: id_u_origin)
+    u_origin.profile_picture
+  end
 end

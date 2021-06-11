@@ -7,29 +7,46 @@
         <div class="col-12 my-4 media">
             <img src="<%= tweet.user.profile_picture %>" class="mr-3" alt="Image profile"  width="64" height="86">
             <div class="media-body">
-
-                <h5 class="mt-0"><%= tweet.user.name %></h5>
-                <p><%= tweet.content %></p>
-
+                <!-- Condicional de retweets-->
+                <%if tweet.is_rt %>
+                    <h5 class="mt-0"><%= tweet.user.name %> ha retwitteado</h5>
+                    <div class="media mt-3">
+                        <img src="<%= tweet.pic_tw_origin(tweet.origin_id) %>" class="mr-3" alt="Image profile"  width="32" height="43">
+                        <div class="media-body">
+                            <h6 class="mt-0"><%= tweet.name_tw_origin(tweet.origin_id) %></h6>
+                            <p><%= tweet.content %></p>
+                        </div>
+                    </div>
+                <% else %>
+                    <h5 class="mt-0"><%= tweet.user.name %></h5>
+                    <p><%= tweet.content %></p>
+                <% end %>
+                <!-- Vista para likes-->
                 <%if tweet.like_count > 0 %>
                     <%= tweet.like_count %>
                 <% end %>
                 <%if current_user %>
                     <%if tweet.user_like?(current_user.id) %>
-                        <i><%= link_to '' , like_path({id: tweet.id_like(current_user)}), method: :delete, class: "fas fa-heart" %></i>
+                        <i><%= link_to '' , like_path({id: tweet.id_like(current_user.id)}), method: :delete, class: "fas fa-heart" %></i>
                     <% else %>
                         <i><%= link_to '' , likes_path(like: {tweet_id: tweet.id}, remote: true), method: :post, class: "far fa-heart" %></i>
                     <% end %>
                 <% else %>
                     <i class= "far fa-heart"></i>
                 <%end%>
+
+                <!-- Vista para retweets-->
                 <%if not tweet.is_rt %>
                     <% rt_count = tweet.retweet_count(tweet.id) %>
                     <%if rt_count > 0 %>
                         <%= rt_count %>
                     <% end %>
                 <% end %>
-                <i><%= link_to '' , tweets_path(rt: {origin_id: tweet.user_id, is_rt: true, content: tweet.content }, remote: true), method: :post, class: "fas fa-retweet" %><i>
+                <%if current_user %>
+                    <i><%= link_to '' , tweets_path(tweet: {origin_id: tweet.id, is_rt: true, content: tweet.content }, remote: true), method: :post, class: "fas fa-retweet" %><i>
+                <% else %>
+                    <i class= "fas fa-retweet"></i>
+                <% end %>
             </div>
         </div>
     <% end %>
