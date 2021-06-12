@@ -11,12 +11,11 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
+  <div class="form-group">
+    <%= form.text_area :content, class: "form-control twittear" %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Twittear", class: "boton pt-2 float-right" %>
   </div>
 <% end %>

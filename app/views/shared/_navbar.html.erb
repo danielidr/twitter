@@ -1,21 +1,20 @@
-<nav class="navbar navbar-expand-lg navbar-light mb-4 py-4">
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
+<nav class="navbar navbar-expand-lg navbar-dark mb-4 py-3">
+  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+    <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <%= link_to "Twitter" , root_path, class: "navbar-brand px-4" %>
+        <%= link_to "Twitter" , root_path, class: "navbar-brand nombre mt-1" %>
       </li>
-      <li class="nav-item dropdown">
-        <div class="dropdown-menu navbar-left" aria-labelledby="navbarDropdownMenuLink">
-          <% if current_user %>
-            <%#=link_to 'My Profile', user_path(current_user.id) %>
-            <li><%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
-          <% else  %>
-            <li><%=link_to 'Log in', new_user_session_path, class: "dropdown-item"  %></li>
-            <li><%= link_to "Sign in", new_user_registration_path, class: "dropdown-item" %></li>
-          <% end %>
-        </div>
-      </li>
-      </ul>
     </ul>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+      <ul class="navbar-nav ml-auto">
+      
+        <% if current_user %>
+          <li class="nav-item"><%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
+        <% else  %>
+          <li class="nav-item"><%=link_to 'Log in', new_user_session_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "Sign in", new_user_registration_path, class: "mx-4 nav-link" %></li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 </nav>
