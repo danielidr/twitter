@@ -5,7 +5,7 @@
 <div class="container row">
     <% @tweets.each do |tweet| %>
         <div class="col-12 my-4 media">
-            <img src="<%= tweet.user.profile_picture %>" class="mr-3" alt="Image profile"  width="64" height="86">
+            <%= image_tag tweet.user.profile_picture, class: "mr-3", alt: "Image profile", width:"64", height:"86" %>
             <div class="media-body">
                 <!-- Condicional de retweets-->
                 <%if tweet.is_rt %>
