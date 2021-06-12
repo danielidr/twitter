@@ -8,7 +8,7 @@ class Tweet < ApplicationRecord
   end
 
   def retweet_count(id)
-    retweets = Tweet.includes(:origin_id).where(origin_id: id)
+    retweets = Tweet.where(origin_id: id)
     retweets.count
   end
 
@@ -25,19 +25,10 @@ class Tweet < ApplicationRecord
       0
     end
   end
-  
-  def name_tw_origin(o_id)
+
+  def user_tw_origin(o_id)
     tw_origin = Tweet.find_by(id: o_id)
-    id_u_origin = tw_origin.user_id
-    u_origin = User.find_by(id: id_u_origin)
-    u_origin.name
-  end
-  
-  def pic_tw_origin(o_id)
-    tw_origin = Tweet.find_by(id: o_id)
-    id_u_origin = tw_origin.user_id
-    u_origin = User.find_by(id: id_u_origin)
-    u_origin.profile_picture
+    tw_origin.user
   end
 
   def time_tweet(date)

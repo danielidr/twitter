@@ -1,24 +1,26 @@
+<div class="container px-4">
+
 <% if current_user %>
     <%= render 'tweets/form', tweet: @tweet %>
 <% end %>
 
-<div class="container row">
+<div class="container justify-content-center">
     <% @tweets.each do |tweet| %>
-        <div class="col-12 my-4 media">
-            <%= image_tag tweet.user.profile_picture, class: "mr-3", alt: "Image profile", width:"64", height:"86" %>
-            <div class="media-body">
+        <div class="my-4 media">
+            <%= image_tag tweet.user.profile_picture, class: "mr-3 imgRedonda", alt: "Image profile" %>
+            <div class="media-body tweet">
                 <!-- Condicional de retweets-->
                 <%if tweet.is_rt %>
-                    <h5 class="mt-0"><%= tweet.user.name %> ha retwitteado</h5>
+                    <p class="nombre"><%= tweet.user.name %> ha retwitteado</p>
                     <div class="media mt-3">
-                        <img src="<%= tweet.pic_tw_origin(tweet.origin_id) %>" class="mr-3" alt="Image profile"  width="32" height="43">
-                        <div class="media-body">
-                            <h6 class="mt-0"><%= tweet.name_tw_origin(tweet.origin_id) %></h6>
+                        <%= image_tag tweet.user_tw_origin(tweet.origin_id).profile_picture, class: "mr-3 imgRedondart", alt: "Image profile" %>
+                        <div class="media-body rt">
+                            <h6 class="mt-0"><%= tweet.user_tw_origin(tweet.origin_id).name %></h6>
                             <p><%= tweet.content %></p>
                         </div>
                     </div>
                 <% else %>
-                    <h5 class="mt-0"><%= tweet.user.name %></h5>
+                    <p class="nombre"><%= tweet.user.name %></p>
                     <p><%= tweet.content %></p>
                 <% end %>
                 <!-- Vista para likes-->
@@ -27,12 +29,12 @@
                 <% end %>
                 <%if current_user %>
                     <%if tweet.user_like?(current_user.id) %>
-                        <i><%= link_to '' , like_path({id: tweet.id_like(current_user.id)}), method: :delete, class: "fas fa-heart" %></i>
+                        <i><%= link_to '' , like_path({id: tweet.id_like(current_user.id)}), method: :delete, class: "fas fa-heart icons text-decoration-none pr-2" %></i>
                     <% else %>
-                        <i><%= link_to '' , likes_path(like: {tweet_id: tweet.id}, remote: true), method: :post, class: "far fa-heart" %></i>
+                        <i><%= link_to '' , likes_path(like: {tweet_id: tweet.id}, remote: true), method: :post, class: "far fa-heart icons text-decoration-none pr-2" %></i>
                     <% end %>
                 <% else %>
-                    <i class= "far fa-heart"></i>
+                    <i class= "far fa-heart icons pr-2"></i>
                 <%end%>
 
                 <!-- Vista para retweets-->
@@ -43,14 +45,14 @@
                     <% end %>
                 <% end %>
                 <%if current_user %>
-                    <i><%= link_to '' , tweets_path(tweet: {origin_id: tweet.id, is_rt: true, content: tweet.content }, remote: true), method: :post, class: "fas fa-retweet" %><i>
+                    <i><%= link_to '' , tweets_path(tweet: {origin_id: tweet.id, is_rt: true, content: tweet.content }, remote: true), method: :post, class: "fas fa-retweet icons text-decoration-none" %><i>
                 <% else %>
-                    <i class= "fas fa-retweet"></i>
+                    <i class= "fas fa-retweet icons"></i>
                 <% end %>
 
                 <!-- Vista para fecha-->
                 <br>
-                <%= link_to "Hace #{tweet.time_tweet(tweet.created_at)}", tweet_path(tweet) %>
+                <%= link_to "Hace #{tweet.time_tweet(tweet.created_at)}", tweet_path(tweet), class: "tiempo text-decoration-none" %>
             </div>
         </div>
     <% end %>
@@ -60,4 +62,6 @@
     <div class="col-md-8 offset-md-2">
     <%= link_to_next_page @tweets, 'Mostrar más tweets' %>
     </div>
+</div>
+
 </div>

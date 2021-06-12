@@ -2,15 +2,15 @@
 
 <!-- Vista de Tweet-->
 <div class="col-12 my-4 media">
-  <%= image_tag @tweet.user.profile_picture, class: "mr-3", alt: "Image profile", width:"64", height:"86" %>
+  <%= image_tag @tweet.user.profile_picture, class: "mr-3", alt: "Image profile" %>
     <div class="media-body">
       <!-- Condicional de retweets-->
         <%if @tweet.is_rt %>
           <h5 class="mt-0"><%= @tweet.user.name %> ha retwitteado</h5>
             <div class="media mt-3">
-              <img src="<%= @tweet.pic_tw_origin(@tweet.origin_id) %>" class="mr-3" alt="Image profile"  width="32" height="43">
+              <%= image_tag @tweet.user_tw_origin(@tweet.origin_id).profile_picture, class: "mr-3", alt: "Image profile", width:"32", height:"43" %>
               <div class="media-body">
-                <h6 class="mt-0"><%= @tweet.name_tw_origin(@tweet.origin_id) %></h6>
+                <h6 class="mt-0"><%= @tweet.user_tw_origin(@tweet.origin_id).name %></h6>
                 <p><%= @tweet.content %></p>
               </div>
             </div>
