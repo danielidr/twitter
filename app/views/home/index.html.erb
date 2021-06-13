@@ -5,12 +5,12 @@
         <% if current_user %>
         <div class="my-4 media">
             <%= image_tag current_user.profile_picture, class: "mr-3 imgRedonda", alt: "Image profile" %>
-                <div class="tweet ml-2">
-                    <h4>¿Qué está pasando?</h4>
-                    <div class="container px-4">
-                        <%= render 'tweets/form', tweet: @tweet %> 
-                    </div>
+            <div class="tweet ml-2">
+                <h4>¿Qué está pasando?</h4>
+                <div class="container px-4">
+                    <%= render 'tweets/form', tweet: @tweet %> 
                 </div>
+            </div>
         </div>
         <% end %>
         <!-- Tweets -->
@@ -24,7 +24,7 @@
                         <div class="media mt-3">
                             <%= image_tag tweet.user_tw_origin(tweet.origin_id).profile_picture, class: "mr-3 imgRedondart", alt: "Image profile" %>
                             <div class="media-body rt">
-                                <h6 class="mt-0"><%= tweet.user_tw_origin(tweet.origin_id).name %></h6>
+                                <h6><%= tweet.user_tw_origin(tweet.origin_id).name %></h6>
                                 <p><%= tweet.content %></p>
                             </div>
                         </div>
@@ -68,6 +68,7 @@
         <div class="row">
             <div class="col-md-8 offset-md-2 pagination justify-content-center">
                 <%= link_to_next_page @tweets, 'Mostrar más tweets', class: "mostrar text-decoration-none" %>
+                <%= link_to_previous_page @tweets, 'Atrás', class: "mostrar text-decoration-none ml-4" %>
             </div>
         </div>
     </div>
