@@ -1,6 +1,6 @@
 body {
   font-family: 'Baloo Tammudu 2', sans-serif;
-  background-color: #79D9B6;
+  background-color: #F2F2F2;
   margin: 0;
   font-weight: 400;
   font-size: 22px;
@@ -26,15 +26,17 @@ i {
 }
 
 .navbar {
-  background-color: #523859;
+  background-color: #4A1942;
 }
 
 .tweet {
-  background-color: #6AA695;
+  background-color: #8F8EBF;
   width: 100%;
   color: #523859;
-  padding: 30px 30px 20px 30px;
+  padding: 30px 40px 20px 30px;
   border-radius: 15px;
+  line-height : 25px;
+  text-align: justify;
 }
 
 .nombre{

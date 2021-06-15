@@ -18,6 +18,10 @@ class Tweet < ApplicationRecord
     users_like.include? id
   end
 
+  def user_follow(id)
+    user.friends.find_by(friend_id: id)
+  end
+
   def id_like(u_id)
     like = likes.find_by(user_id: u_id)
     if like != nil
@@ -26,6 +30,8 @@ class Tweet < ApplicationRecord
       0
     end
   end
+
+
 
   def user_tw_origin(o_id)
     tw_origin = Tweet.find_by(id: o_id)
