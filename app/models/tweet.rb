@@ -4,6 +4,8 @@ class Tweet < ApplicationRecord
   has_many :likes
   paginates_per 50
 
+  scope :tweets_for_me, -> (ids_friends) { where(user_id: ids_friends) }
+
   def like_count
     likes.count
   end
@@ -31,8 +33,6 @@ class Tweet < ApplicationRecord
     end
   end
 
-
-
   def user_tw_origin(o_id)
     tw_origin = Tweet.find_by(id: o_id)
     tw_origin.user
@@ -52,5 +52,6 @@ class Tweet < ApplicationRecord
     end
     time_t 
   end
-    
+  
+  
 end
