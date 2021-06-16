@@ -13,3 +13,4 @@ u_id = @usuario[0].id
 60.times do |i|
     Tweet.create([{ content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer blandit #{i}", user_id: u_id }])
 end
+endAdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
