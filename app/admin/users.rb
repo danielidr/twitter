@@ -5,7 +5,7 @@ ActiveAdmin.register User do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :email, :encrypted_password, :name, :profile_picture, :likes_id
+  permit_params :email, :encrypted_password, :name, :profile_picture, friend_ids: [], tweet_ids: [], like_ids: []
   #
   # or
   #
@@ -14,13 +14,26 @@ ActiveAdmin.register User do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+  filter :email
+  filter :name
 
   index do
     selectable_column
     id_column
     column :email
     column :name
-    column :likes_id
+    column :friends do |user|
+      Friend.where(friend_id: user.id).count
+    end
+    column :tweets do |user|
+      user.tweets.count
+    end
+    column :likes do |user|
+      user.likes.count
+    end
+    column "Retweets", :tweet do |user|
+      user.tweets.where(is_rt: true).count
+    end
     actions
   end
 end
