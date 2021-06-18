@@ -1,29 +1,33 @@
-<div class="container justify-content-center formulario">
+<div class="container justify-content-center formulario mt-4">
 
-<h2 class="text-center">Iniciar sesión</h2>
+  <h2 class="text-center">Iniciar sesión</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-group">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label "Contraseña" %><br />
-    <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="form-group">
-      <%= f.check_box :remember_me %>
-      <%= f.label "Recordarme" %>
+      <%= f.label :email, class: "labels" %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label "Contraseña", class: "labels" %><br />
+      <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+    </div>
+
+    <% if devise_mapping.rememberable? %>
+      <div class="form-group">
+        <%= f.check_box :remember_me %>
+        <%= f.label "Recordarme" %>
+      </div>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit "Aceptar", class: "boton"  %>
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit "Aceptar", class: "boton"  %>
+  <div class="mt-4 nav-link adm">
+    <%= link_to "Administrador" , admin_root_path, class: "text-decoration-none" %>
   </div>
-<% end %>
 
 </div>
 

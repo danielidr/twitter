@@ -13,8 +13,12 @@ body {
 }
 
 .nav-link {
-  font-size: 18px;
+  font-size: 16px;
   padding-top: 15px;
+}
+
+.search {
+  margin-left: 465px;
 }
 
 .twittear {
@@ -91,12 +95,20 @@ a {
   color: #000;
 }
 
+.adm {
+  margin-left: 400px;
+}
+
 .login {
   color: #f0f0f0;
 }
 
 .formulario {
   width: 50%;
+}
+
+.labels {
+  padding-top: 20px;
 }
 
 th {

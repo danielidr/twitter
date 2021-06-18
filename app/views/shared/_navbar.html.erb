@@ -5,17 +5,22 @@
         <%= link_to "Twitter" , root_path, class: "navbar-brand nombre mt-1" %>
       </li>
       <li class="nav-item active">
-        <%= link_to "Todos" , tweets_path, class: "navbar-brand mt-1" %>
+        <%= link_to "Ver todos los tweets" , tweets_path, class: "navbar-brand mt-1" %>
       </li>
     </ul>
-    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2 search">
+    <%= form_tag home_index_path, method: :get do %>
+        <%= text_field_tag :q, nil, class: 'btn btn-outline-light my-2 my-sm-0'%>
+        <%= submit_tag "Buscar", class: 'btn btn-outline-light' %>
+    <% end %>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse">
       <ul class="navbar-nav ml-auto">
-      
-        <% if current_user %>
+              <% if current_user %>
           <li class="nav-item"><%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
         <% else  %>
           <li class="nav-item"><%=link_to 'Iniciar sesión', new_user_session_path, class: "nav-link" %></li>
-          <li class="nav-item"><%= link_to "Registrarse", new_user_registration_path, class: "mx-4 nav-link" %></li>
+          <li class="nav-item"><%= link_to "Registrarse", new_user_registration_path, class: "mx-1 nav-link" %></li>
         <% end %>
       </ul>
     </div>
