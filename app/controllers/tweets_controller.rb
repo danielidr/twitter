@@ -27,7 +27,7 @@ class TweetsController < ApplicationController
     array_content = @tweet.content.split(" ")
     array_content = array_content.map do |word| 
       if word.start_with?("#")
-        "<a href='/hashtags?ht=#{word}'>#{word}</a>"
+        "<a href='/hashtags/show?ht=#{ word.sub "#", "%23"}'>#{word}</a>"
       else
         word
       end

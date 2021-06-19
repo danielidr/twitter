@@ -10,7 +10,7 @@
           <%if @tweet.is_rt %>
             <p class="nombre"><%= @tweet.user.name %> ha retwitteado</p>
               <div class="media mt-3">
-                <%= image_tag @tweet.user_tw_origin(@tweet.origin_id).profile_picture, class: "mr-3 imgRedonda", alt: "Image profile" %>
+                <%= image_tag @tweet.user_tw_origin(@tweet.origin_id).profile_picture, class: "mr-3 imgRedondart", alt: "Image profile" %>
                 <div class="media-body rt">
                   <h6><%= @tweet.user_tw_origin(@tweet.origin_id).name %></h6>
                   <p><%= @tweet.content.html_safe %></p>
