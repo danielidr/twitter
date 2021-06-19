@@ -16,12 +16,12 @@
                             <%= image_tag tweet.user_tw_origin(tweet.origin_id).profile_picture, class: "mr-3 imgRedondart", alt: "Image profile" %>
                             <div class="media-body rt">
                                 <h6><%= tweet.user_tw_origin(tweet.origin_id).name %></h6>
-                                <p><%= tweet.content %></p>
+                                <p><%= tweet.content.html_safe %></p>
                             </div>
                         </div>
                     <% else %>
                         <p class="nombre"><%= tweet.user.name %></p>
-                        <p><%= tweet.content %></p>
+                        <p><%= tweet.content.html_safe %></p>
                     <% end %>
                     <!-- Vista para likes-->
                     <%if tweet.like_count > 0 %>

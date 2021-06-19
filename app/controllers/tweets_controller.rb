@@ -23,6 +23,18 @@ class TweetsController < ApplicationController
   def create
     @tweet = Tweet.new(tweet_params)
     @tweet.user_id = current_user.id
+
+    array_content = @tweet.content.split(" ")
+    array_content = array_content.map do |word| 
+      if word.start_with?("#")
+        "<a href='/hashtags?ht=#{word}'>#{word}</a>"
+      else
+        word
+      end
+    end
+
+    @tweet.content = array_content.join(" ")
+
     respond_to do |format|
       if @tweet.save
         format.html { redirect_to root_path, notice: "Tweet creado con exito" }
