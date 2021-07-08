@@ -2,6 +2,8 @@ module Api
     module V1
         class TwitterController < V1Controller
             
+            include ActionController::HttpAuthentication::Basic::ControllerMethods
+
             def news
                 tweets_new = Tweet.last(50)
                 render json: json_structure(tweets_new)
@@ -13,7 +15,34 @@ module Api
                 render json: json_structure(tweets_date)
             end
             
+            def new_tweet
+                http_authenticate
+                if current_user
+                    json = JSON.parse(request.raw_post)
+                    tweet = Tweet.new
+                    tweet.content = json['content']
+                    tweet.user_id = current_user.id
+
+                    array_content = tweet.content.split(" ")
+                    array_content = array_content.map do |word| 
+                        if word.start_with?("#")
+                            "<a href='/hashtags/show?ht=#{ word.sub "#", "%23"}'>#{word}</a>"
+                        else
+                            word
+                        end
+                    end
+                    tweet.content = array_content.join(" ")
+                    tweet.save
+                end
+            end
+
             private
+
+            def http_authenticate
+                authenticate_or_request_with_http_basic do |user_name, password|
+                    current_user != nil
+                end
+            end
 
             def json_structure(tweets)
                 array = []

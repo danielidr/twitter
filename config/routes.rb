@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get 'news', to: 'twitter#news'
       get ':date1/:date2', to: 'twitter#by_date'
+      post 'new_tweet', to: 'twitter#new_tweet'
     end
   end
 end

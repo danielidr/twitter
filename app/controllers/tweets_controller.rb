@@ -1,5 +1,5 @@
 class TweetsController < ApplicationController
-  include ActionController::HttpAuthentication::Basic::ControllerMethods
+  
   before_action :set_tweet, only: %i[ show edit update destroy ]
 
   # GET /tweets or /tweets.json
